@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App by Iza Habjan</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="body-container">
+      <form id="search-form">
+        <ul>
+          <li>
+            <input
+              class="shadow-sm"
+              type="search"
+              placeholder="🔍 Search City"
+              id="search-enter"
+            />
+          </li>
+          <li>
+            <button id="search-button">👀</button>
+          </li>
+          <li>
+            <button id="location-button">📍</button>
+          </li>
+          <li class="date-time" id="today">Tue 3. Jun, ⏰ 16:14</li>
+        </ul>
+      </form>
+
+      <h1 id="city">Berlin</h1>
+      <h6 id="description">Partly Cloudy</h6>
+
+      <div class="container">
+        <div class="row">
+          <div class="col order-first humidity-wind align-self">
+            Humidity: <span id="humidity">25</span>% <br />
+            Wind: <span id="wind">11</span> km/h
+          </div>
+          <div class="col align-self">
+            <span class="h1-degrees current">29</span>
+            <span class="select-degrees">
+              <a href="#" class="selected" id="celsius">°C</a> |
+              <a href="#" id="fahrenheit">°F</a>
+            </span>
+          </div>
+          <div class="col order-last h-l align-self">
+            H: <span id="high">29</span>°C <br />
+            L: <span id="low">13</span>°C
+          </div>
+        </div>
+      </div>
+
+      <img
+        src="images/partly-cloudy.png"
+        alt="partly-cloudy"
+        class="big-icon"
+      />
+
+      <div class="container">
+        <div class="row">
+          <div class="col order-first day">Friday</div>
+          <div class="col">
+            <img
+              src="images/cloudy.png"
+              alt="partly-cloudy"
+              class="small-icon"
+            />
+          </div>
+          <div class="col order-last high-low">
+            <div class="row">
+              <div class="col">27°C</div>
+              <div class="col">15°C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col order-first day">Saturday</div>
+          <div class="col">
+            <img
+              src="images/partly-cloudy.png"
+              alt="partly-cloudy"
+              class="small-icon"
+            />
+          </div>
+          <div class="col order-last high-low">
+            <div class="row">
+              <div class="col">27°C</div>
+              <div class="col">16°C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col order-first day">Sunday</div>
+          <div class="col">
+            <img
+              src="images/partly-cloudy.png"
+              alt="partly-cloudy"
+              class="small-icon"
+            />
+          </div>
+          <div class="col order-last high-low">
+            <div class="row">
+              <div class="col">25°C</div>
+              <div class="col">16°C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col order-first day">Monday</div>
+          <div class="col">
+            <img
+              src="images/partly-cloudy.png"
+              alt="partly-cloudy"
+              class="small-icon"
+            />
+          </div>
+          <div class="col order-last high-low">
+            <div class="row">
+              <div class="col">26°C</div>
+              <div class="col">14°C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col order-first day">Tuesday</div>
+          <div class="col">
+            <img
+              src="images/partly-cloudy.png"
+              alt="partly-cloudy"
+              class="small-icon"
+            />
+          </div>
+          <div class="col order-last high-low">
+            <div class="row">
+              <div class="col">26°C</div>
+              <div class="col">13°C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col order-first day">Wednesday</div>
+          <div class="col">
+            <img
+              src="images/partly-cloudy.png"
+              alt="partly-cloudy"
+              class="small-icon"
+            />
+          </div>
+          <div class="col order-last high-low">
+            <div class="row">
+              <div class="col">24°C</div>
+              <div class="col">13°C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        Developed with ♥︎ in Berlin by
+        <a class="link" href="https://www.shecodes.io/students/295-iza-habjan">
+          Iza Habjan
+        </a>
+        <a class="link" href="https://github.com/iza-habjan">
+          <span> / GitHub </span>
+        </a>
+        <br />
+        <span class="icons-made-by">
+          Icons made by
+          <a class="link" href="https://www.freepik.com" title="Freepik"
+            >Freepik</a
+          >
+          from
+          <a class="link" href="https://www.flaticon.com/" title="Flaticon"
+            >www.flaticon.com</a
+          >
+        </span>
+      </footer>
+    </div>
+    <script src="src/script.js"></script>
+  </body>
+</html>
