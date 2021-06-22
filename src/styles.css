@@ -7,11 +7,12 @@ input {
   border-color: #fcc97d;
   border-radius: 40px;
   margin-right: 0;
+  width: 130px;
 }
 
 ul {
   list-style: none;
-  padding: none;
+  padding: 0;
   float: left;
 }
 li {
@@ -42,7 +43,7 @@ h6 {
 
 .date-time {
   text-align: right;
-  margin-left: 10px;
+  margin-left: 30px;
   color: #2c87d1;
 }
 .select-degrees {
