@@ -1,13 +1,24 @@
 body {
   text-align: center;
 }
-input {
+/*input {
   background-color: #f8f1e6;
   border-style: solid;
   border-color: #fcc97d;
   border-radius: 40px;
   margin-right: 0;
   width: 130px;
+}*/
+
+.form-control {
+  background-color: #f8f1e6;
+  border-style: solid;
+  border-color: #fcc97d;
+  border-width: 2px;
+  border-radius: 40px;
+  margin-right: 0;
+  width: 150px;
+  line-height: 18px;
 }
 
 ul {
@@ -43,7 +54,7 @@ h6 {
 
 .date-time {
   text-align: right;
-  margin-left: 30px;
+  margin-left: 12px;
   color: #2c87d1;
 }
 .select-degrees {
