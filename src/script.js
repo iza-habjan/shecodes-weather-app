@@ -108,8 +108,11 @@ function search(city) {
 }
 
 function handleSubmit(event) {
-  let city = document.querySelector("#search-enter").value;
+  let input = document.querySelector("#search-enter");
+  let city = input.value;
   search(city);
+  input.value = "";
+  input.blur();
 }
 
 let searchCityWeather = document.querySelector("#search-button");
