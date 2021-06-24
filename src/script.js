@@ -39,6 +39,59 @@ function formatDate(today) {
 function displayWeatherConditions(response) {
   document.querySelector("#city").innerHTML = response.data.name;
 
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].description;
+
+  let openWeatherId = response.data.weather[0].id;
+  if (openWeatherId === 800) {
+    bigWeatherIcon = "images/clear.png";
+  } else if ([801, 802].includes(openWeatherId)) {
+    bigWeatherIcon = "images/partly-cloudy.png";
+  } else if ([803, 804].includes(openWeatherId)) {
+    bigWeatherIcon = "images/cloudy.png";
+  } else if (
+    [300, 301, 310, 311, 321, 500, 501, 520, 521].includes(openWeatherId)
+  ) {
+    bigWeatherIcon = "images/rain.png";
+  } else if (
+    [302, 312, 313, 314, 502, 503, 504, 522, 531].includes(openWeatherId)
+  ) {
+    bigWeatherIcon = "images/heavy-rain.png";
+  } else if (openWeatherId === 511) {
+    bigWeatherIcon = "images/freezing-rain.png";
+  } else if (
+    [600, 601, 611, 612, 613, 615, 616, 620, 621, 622].includes(openWeatherId)
+  ) {
+    bigWeatherIcon = "images/snow.png";
+  } else if ([200, 201, 202, 230, 231, 232].includes(openWeatherId)) {
+    bigWeatherIcon = "images/thunderstorm-rain.png";
+  } else if ([210, 211, 212, 221].includes(openWeatherId)) {
+    bigWeatherIcon = "images/thunderstorm.png";
+  } else if ([701, 721].includes(openWeatherId)) {
+    bigWeatherIcon = "images/mist.png";
+  } else if (openWeatherId === 741) {
+    bigWeatherIcon = "images/fog.png";
+  } else if (openWeatherId === 781) {
+    bigWeatherIcon = "images/tornado.png";
+  } else if (openWeatherId === 711) {
+    bigWeatherIcon = "images/smoke.png";
+  } else if ([731, 751, 761].includes(openWeatherId)) {
+    bigWeatherIcon = "images/dust.png";
+  } else if (openWeatherId === 762) {
+    bigWeatherIcon = "images/volcanic-ash.png";
+  } else if (openWeatherId === 771) {
+    bigWeatherIcon = "images/squalls.png";
+  }
+
+  document
+    .querySelector("#big-weather-icon")
+    .setAttribute(
+      "src",
+      bigWeatherIcon,
+      "alt",
+      response.data.weather[0].description
+    );
+
   celsiusTemperature = response.data.main.temp;
 
   document.querySelector(".current").innerHTML = Math.round(celsiusTemperature);
@@ -48,9 +101,6 @@ function displayWeatherConditions(response) {
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
-
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].main;
 
   document.querySelector("#high").innerHTML = Math.round(
     response.data.main.temp_max
@@ -125,6 +175,8 @@ let searchCityWeather = document.querySelector("#search-button");
 searchCityWeather.addEventListener("click", handleSubmit);
 
 let celsiusTemperature = null;
+
+let bigWeatherIcon = null;
 
 let celsiusElement = document.querySelector("#celsius");
 celsiusElement.addEventListener("click", celsiusClick);
