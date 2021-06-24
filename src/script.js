@@ -1,4 +1,9 @@
-// date and time
+function handleSearch(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#search-enter");
+  let h1 = document.querySelector("h1");
+  h1.innerHTML = `${cityInput.value}`;
+}
 
 function formatDate(today) {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -20,7 +25,6 @@ function formatDate(today) {
     "Nov",
     "Dec",
   ];
-
   let month = months[today.getMonth()];
 
   let hour = today.getHours();
@@ -32,53 +36,12 @@ function formatDate(today) {
   todayElement.innerHTML = `${day}, ${date}. ${month}, ⏰ ${hour}:${minutes}`;
 }
 
-formatDate(new Date());
-
-// search engine
-
-function handleSearch(event) {
-  event.preventDefault();
-  let cityInput = document.querySelector("#search-enter");
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = `${cityInput.value}`;
-}
-
-let input = document.querySelector("#search-button");
-input.addEventListener("click", handleSearch);
-
-// link to Celsius and Fahrenheit
-
-function celsiusClick(event) {
-  let celsius = document.querySelector(".current");
-  celsius.innerHTML = `29`;
-
-  event.currentTarget.classList.add("selected");
-  fahrenheitElement.classList.remove("selected");
-}
-
-let celsiusElement = document.querySelector("#celsius");
-celsiusElement.addEventListener("click", celsiusClick);
-
-function fahrenheitClick(event) {
-  let fahrenheit = Math.round((29 * 9) / 5 + 32);
-  let fahrenheitSelect = document.querySelector(".current");
-  fahrenheitSelect.innerHTML = `${fahrenheit}`;
-
-  event.currentTarget.classList.add("selected");
-  celsiusElement.classList.remove("selected");
-}
-
-let fahrenheitElement = document.querySelector("#fahrenheit");
-fahrenheitElement.addEventListener("click", fahrenheitClick);
-
-// name of searched city and its current weather conditions
-
 function displayWeatherConditions(response) {
   document.querySelector("#city").innerHTML = response.data.name;
 
-  document.querySelector(".current").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  celsiusTemperature = response.data.main.temp;
+
+  document.querySelector(".current").innerHTML = Math.round(celsiusTemperature);
 
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
 
@@ -115,10 +78,25 @@ function handleSubmit(event) {
   input.blur();
 }
 
-let searchCityWeather = document.querySelector("#search-button");
-searchCityWeather.addEventListener("click", handleSubmit);
+function celsiusClick(event) {
+  event.preventDefault();
+  let celsius = document.querySelector(".current");
+  celsius.innerHTML = Math.round(celsiusTemperature);
 
-// Geolocation API - GPS coordinates
+  event.currentTarget.classList.add("selected");
+  fahrenheitElement.classList.remove("selected");
+}
+
+function fahrenheitClick(event) {
+  event.preventDefault();
+  let fahrenheit = Math.round((celsiusTemperature * 9) / 5 + 32);
+
+  let fahrenheitSelect = document.querySelector(".current");
+  fahrenheitSelect.innerHTML = `${fahrenheit}`;
+
+  event.currentTarget.classList.add("selected");
+  celsiusElement.classList.remove("selected");
+}
 
 function showPosition(position) {
   let unit = "metric";
@@ -137,6 +115,22 @@ function showLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(showPosition);
 }
+
+let input = document.querySelector("#search-button");
+input.addEventListener("click", handleSearch);
+
+formatDate(new Date());
+
+let searchCityWeather = document.querySelector("#search-button");
+searchCityWeather.addEventListener("click", handleSubmit);
+
+let celsiusTemperature = null;
+
+let celsiusElement = document.querySelector("#celsius");
+celsiusElement.addEventListener("click", celsiusClick);
+
+let fahrenheitElement = document.querySelector("#fahrenheit");
+fahrenheitElement.addEventListener("click", fahrenheitClick);
 
 let showPositionButton = document.querySelector("#location-button");
 showPositionButton.addEventListener("click", showLocation);
