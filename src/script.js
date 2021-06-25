@@ -105,14 +105,6 @@ function displayWeatherConditions(response) {
     response.data.wind.speed
   );
 
-  document.querySelector("#high").innerHTML = Math.round(
-    response.data.main.temp_max
-  );
-
-  document.querySelector("#low").innerHTML = Math.round(
-    response.data.main.temp_min
-  );
-
   getForecast(response.data.coord);
 }
 
