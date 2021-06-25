@@ -140,40 +140,80 @@ function getForecast(coordinates) {
   axios.get(apiUrl).then(displayForecast);
 }
 
+function getCustomIcon(id) {
+  let weatherIcon;
+
+  if (id === 800) {
+    weatherIcon = "images/clear.png";
+  } else if ([801, 802].includes(id)) {
+    weatherIcon = "images/partly-cloudy.png";
+  } else if ([803, 804].includes(id)) {
+    weatherIcon = "images/cloudy.png";
+  } else if ([300, 301, 310, 311, 321, 500, 501, 520, 521].includes(id)) {
+    weatherIcon = "images/rain.png";
+  } else if ([302, 312, 313, 314, 502, 503, 504, 522, 531].includes(id)) {
+    weatherIcon = "images/heavy-rain.png";
+  } else if (id === 511) {
+    weatherIcon = "images/freezing-rain.png";
+  } else if ([600, 601, 611, 612, 613, 615, 616, 620, 621, 622].includes(id)) {
+    weatherIcon = "images/snow.png";
+  } else if ([200, 201, 202, 230, 231, 232].includes(id)) {
+    weatherIcon = "images/thunderstorm-rain.png";
+  } else if ([210, 211, 212, 221].includes(id)) {
+    weatherIcon = "images/thunderstorm.png";
+  } else if ([701, 721].includes(id)) {
+    weatherIcon = "images/mist.png";
+  } else if (id === 741) {
+    weatherIcon = "images/fog.png";
+  } else if (id === 781) {
+    weatherIcon = "images/tornado.png";
+  } else if (id === 711) {
+    weatherIcon = "images/smoke.png";
+  } else if ([731, 751, 761].includes(id)) {
+    weatherIcon = "images/dust.png";
+  } else if (id === 762) {
+    weatherIcon = "images/volcanic-ash.png";
+  } else if (id === 771) {
+    weatherIcon = "images/squalls.png";
+  }
+
+  return weatherIcon;
+}
+
 function displayForecast(response) {
   let forecast = response.data.daily;
 
   let forecastElement = document.querySelector("#weather-forecast");
 
-  let forecastHTML = `<div class="row">`;
+  let forecastHTML = "";
 
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
         `
-      <div class="col order-first day">${formatDay(forecastDay.dt)}</div>
-      ${index}
-      <div class="col">
-        <img
-          src="https://openweathermap.org/img/wn/${
-            forecastDay.weather[0].icon
-          }@2x.png"
-          alt="partly-cloudy"
-          class="small-icon"
-        />
-      </div>
-      <div class="col order-last high-low">
+      <div class="container">
         <div class="row">
-          <div class="col">${Math.round(forecastDay.temp.max)}°</div>
-          <div class="col">${Math.round(forecastDay.temp.min)}°</div>
+        <div class="col order-first day">${formatDay(forecastDay.dt)}</div>
+        <div class="col">
+          <img
+            src="${getCustomIcon(forecastDay.weather[0].id)}"
+            alt="partly-cloudy"
+            class="small-icon"
+          />
+        </div>
+        <div class="col order-last high-low">
+          <div class="row">
+            <div class="col">${Math.round(forecastDay.temp.max)}°</div>
+            <div class="col">${Math.round(forecastDay.temp.min)}°</div>
+          </div>
+        </div>
         </div>
       </div>
   `;
     }
   });
 
-  forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
