@@ -111,10 +111,52 @@ function displayWeatherConditions(response) {
   );
 }
 
-function search(city) {
+function getForecast(coordinates) {
+  let apiEndpoint = "https://api.openweathermap.org/data/2.5/onecall?";
+  let apiKey = "477355458f09adef7ea7ed5ab3947103";
   let unit = "metric";
+  let apiUrl = `${apiEndpoint}lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#weather-forecast");
+
+  let forecastHTML = `<div class="row">`;
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="col order-first day">${day}</div>
+      <div class="col">
+        <img
+          src="images/cloudy.png"
+          alt="partly-cloudy"
+          class="small-icon"
+        />
+      </div>
+      <div class="col order-last high-low">
+        <div class="row">
+          <div class="col">27°C</div>
+          <div class="col">15°C</div>
+        </div>
+      </div>
+  `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+
+  getForecast(response.data.coord);
+}
+
+function search(city) {
   let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather?";
   let apiKey = "477355458f09adef7ea7ed5ab3947103";
+  let unit = "metric";
   let apiUrl = `${apiEndpoint}q=${city}&appid=${apiKey}&units=${unit}`;
 
   axios.get(apiUrl).then(displayWeatherConditions);
