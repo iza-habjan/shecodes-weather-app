@@ -159,7 +159,7 @@ function displayForecast(response = forecastResponse) {
           />
         </div>
         <div class="col order-last high-low">
-          <div class="row">
+          <div class="row forecast-temperature">
             <div class="col">${getTemperature(forecastDay.temp.max)}°</div>
             <div class="col">${getTemperature(forecastDay.temp.min)}°</div>
           </div>

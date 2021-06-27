@@ -20,9 +20,9 @@
         <ul>
           <li>
             <input
-              class="shadow-sm form-control"
               type="search"
               placeholder="🌍 Search City"
+              class="form-control"
               id="search-enter"
             />
           </li>
@@ -32,20 +32,17 @@
           <li>
             <button id="location-button">📍</button>
           </li>
-          <li class="date-time" id="today">Tue 3. Jun, ⏰ 16:14</li>
+          <li class="date-time" id="today">Tue 3. Jun ⏰ 16:14</li>
         </ul>
       </form>
 
       <h1 id="city"></h1>
-      <h6 id="description"></h6>
+      <h6 class="common-font" id="description"></h6>
 
       <div class="container">
         <div class="row">
-          <div class="col order-first humidity-wind align-self">
-            Humidity: <span id="humidity"></span>% <br />
-            Wind: <span id="wind"></span> km/h
-          </div>
-          <div class="col align-self">
+          <div class="col">
+            <img class="big-icon weather-icon" id="big-weather-icon" />
             <span class="h1-degrees current"></span>
             <span class="select-degrees">
               <a href="#" class="selected" id="celsius">°C</a> |
@@ -55,10 +52,14 @@
         </div>
       </div>
 
-      <img class="big-icon weather-icon" id="big-weather-icon" />
+      <h6 class="order-first humidity-wind common-font">
+        Humidity: <span id="humidity"></span>% <br />
+        Wind: <span id="wind"></span> km/h
+      </h6>
 
       <div id="weather-forecast"></div>
-      <footer>
+
+      <footer class="common-font">
         👩🏻‍💻 & 👩🏻‍🎨 with ♥︎ in Berlin by
         <a
           class="link"
